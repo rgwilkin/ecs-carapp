@@ -1,13 +1,13 @@
 package com.rw.carapp;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.springframework.util.Assert.isTrue;
 
+import com.rw.carapp.models.Car;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.junit.jupiter.api.Assertions;
-import org.springframework.util.Assert;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class CarTests {
@@ -15,14 +15,14 @@ public class CarTests {
   @Test
   public void carTest_IdSetAndGet(){
     Car car = new Car();
-    assertEquals(car.getId(),null);
+    assertEquals(car.getId(),0);
     // check on default initial
 
-    car.setId(99l);
+    car.setId(99);
 
-    assertEquals(car.getId(),99l);
+    assertEquals(car.getId(),99);
   }
-  
+
   @Test
   public void carTest_MakeSetAndGet(){
     Car car = new Car();

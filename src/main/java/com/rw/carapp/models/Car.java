@@ -1,32 +1,30 @@
-package com.rw.carapp;
-
-
+package com.rw.carapp.models;
 import javax.persistence.Entity;
-import org.springframework.data.annotation.Id;
 
-import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Car {
 
-  @javax.persistence.Id
+  @Id
   @GeneratedValue
-  private  Long id;
+  private  int id;
   private String make;
   private String model;
   private String colour;
   private int year;
 
 
-  public Long getId()
+  public int getId()
   {
     return id;
   }
 
-  public void setId(Long id){
+  public void setId(int id){
     this.id = id;
   }
 
