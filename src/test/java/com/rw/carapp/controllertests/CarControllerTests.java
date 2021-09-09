@@ -14,7 +14,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rw.carapp.controllers.CarController;
 import com.rw.carapp.models.Car;
 import com.rw.carapp.services.CarService;
-import javassist.NotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -5,12 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.springframework.util.Assert.isTrue;
 
 import com.rw.carapp.models.Car;
+import com.rw.carapp.services.WordMatchService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
 @SpringBootTest
 public class CarTests {
+
+  private WordMatchService wordMatchService;
+  public CarTests(){
+    wordMatchService = new WordMatchService();
+  }
 
   @Test
   public void carTest_IdSetAndGet(){

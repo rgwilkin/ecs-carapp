@@ -2,6 +2,7 @@ package com.rw.carapp.controllers;
 
 import com.rw.carapp.services.CarService;
 import com.rw.carapp.models.Car;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ public class CarController {
 
   public CarService carService;
 
-  public CarController(CarService carService){
+  public CarController(@Autowired CarService carService){
     this.carService = carService;
   }
 

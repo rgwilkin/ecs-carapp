@@ -4,18 +4,27 @@ import com.rw.carapp.models.Car;
 import com.rw.carapp.repositories.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class CarService {
 
   CarRepository carRepository;
+  WordMatchService wordMatchService;
 
   @Autowired
-  public CarService(CarRepository carRepository){
+  public CarService(@Autowired CarRepository carRepository, @Autowired WordMatchService wordMatchService)
+  {
     this.carRepository = carRepository;
+    this.wordMatchService = wordMatchService;
   }
 
   public void add(Car car) throws Exception {
+    // add similar items for model
+
+    String similarItems = String.join(",", wordMatchService.getMatches(car.getModel()));
+
+    car.setSimilarItems(similarItems);
     carRepository.save(car);
   }
 

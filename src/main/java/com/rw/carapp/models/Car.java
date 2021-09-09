@@ -1,14 +1,16 @@
 package com.rw.carapp.models;
+import com.rw.carapp.services.WordMatchService;
+import java.util.List;
 import javax.persistence.Entity;
 
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Car {
+
+
 
   @Id
   @GeneratedValue
@@ -17,6 +19,8 @@ public class Car {
   private String model;
   private String colour;
   private int year;
+  private String similarItems;
+
 
 
   public int getId()
@@ -67,4 +71,12 @@ public class Car {
     this.year = year;
   }
 
+
+  public String getSimilarItems() {
+    return similarItems;
+  }
+
+  public void setSimilarItems(String similarItems) {
+    this.similarItems = similarItems;
+  }
 }

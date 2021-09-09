@@ -45,9 +45,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 
-
+/*
 @RunWith(SpringRunner.class)
 @WebMvcTest(CarController.class)
 public class CarControllerIntegrationTests {
 
 }
+*/
