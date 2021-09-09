@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("cars-rest")
+@RequestMapping("cars-rest/v1")
 public class CarController {
 
   public CarService carService;
@@ -17,7 +17,7 @@ public class CarController {
     this.carService = carService;
   }
 
-  @GetMapping("/find/{id}")
+  @GetMapping("/retrieve/{id}")
   public ResponseEntity<Car> retrieveBy(@PathVariable Integer id)
       throws ResourceNotFoundException
   {
@@ -25,7 +25,7 @@ public class CarController {
     try {
       c = carService.getSingle(id);
     }
-    catch (EmptyResultDataAccessException e){
+    catch (Exception e){
         return ResponseEntity.notFound().build();
     }
     return ResponseEntity.ok().body(c);
@@ -35,7 +35,7 @@ public class CarController {
   public ResponseEntity<?> add(@RequestBody Car car){
     try{
       carService.add(car);
-      return ResponseEntity.noContent().build();
+      return ResponseEntity.ok().build();
     }
     catch (Exception e){
       return ResponseEntity.notFound().build();
@@ -46,9 +46,9 @@ public class CarController {
   public ResponseEntity<?> delete(@PathVariable(value = "id") int id){
     try{
       carService.delete(id);
-      return ResponseEntity.noContent().build();
+      return ResponseEntity.ok().build();
     }
-    catch (EmptyResultDataAccessException e){
+    catch (Exception e){
       return ResponseEntity.notFound().build();
     }
 

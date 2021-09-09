@@ -15,23 +15,17 @@ public class CarService {
     this.carRepository = carRepository;
   }
 
-  public void add(Car car){
+  public void add(Car car) throws Exception {
     carRepository.save(car);
   }
 
-  public void delete(int id){
+  public void delete(int id) throws Exception{
     carRepository.deleteById(id);
   }
 
-  public Car getSingle(int id){
+  public Car getSingle(int id) throws Exception {
     Car c = carRepository.findById(id).get();
 
     return c;
   }
-
-  public Iterable<Car> getAll(){
-    return carRepository.findAll();
-  }
-
-
 }
