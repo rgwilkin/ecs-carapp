@@ -34,7 +34,7 @@ public class CarServiceTests {
   public void add_test() throws Exception{
     Car c = new Car();
 
-    c.setId(1);
+    //c.setId(1);
     c.setMake("ford");
     c.setModel("focus");
     c.setColour("black");
@@ -48,7 +48,6 @@ public class CarServiceTests {
     Assert.assertEquals(spitterArgument.getValue(),c.getModel());
 
     Mockito.verify(carRepository, Mockito.atLeastOnce()).save(c);
-
   }
 
   @Test
@@ -61,7 +60,7 @@ public class CarServiceTests {
   public void get_test() throws Exception{
     Car c = new Car();
 
-    c.setId(1);
+    //c.setId(1);
     c.setMake("ford");
     c.setModel("focus");
     c.setColour("black");
@@ -70,5 +69,24 @@ public class CarServiceTests {
     Mockito.when(carRepository.findById(2)).thenReturn(java.util.Optional.of(c));
 
     Assert.assertEquals(carService.getSingle(2),c);
+  }
+
+  @Test
+  public void update_test() throws Exception{
+    Car c = new Car();
+
+    c.setMake("ford");
+    c.setModel("focus");
+    c.setColour("black");
+    c.setYear(2000);
+
+    carService.update(c);
+
+    ArgumentCaptor<String> spitterArgument = ArgumentCaptor.forClass(String.class);
+    Mockito.verify(wordMatchService,Mockito.atLeastOnce()).getMatches(spitterArgument.capture());
+
+    Assert.assertEquals(spitterArgument.getValue(),c.getModel());
+
+    Mockito.verify(carRepository, Mockito.atLeastOnce()).save(c);
   }
 }

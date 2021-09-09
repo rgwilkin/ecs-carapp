@@ -33,10 +33,21 @@ public class CarController {
   }
 
   @PostMapping("/cars")
-  public ResponseEntity<?> add(@RequestBody Car car){
+  public ResponseEntity<Car> add(@RequestBody Car car){
     try{
-      carService.add(car);
-      return ResponseEntity.ok().build();
+      var c = carService.add(car);
+      return ResponseEntity.ok().body(c);
+    }
+    catch (Exception e){
+      return ResponseEntity.notFound().build();
+    }
+  }
+
+  @PutMapping("/cars")
+  public ResponseEntity<Car> update(@RequestBody Car car){
+    try{
+      var c = carService.update(car);
+      return ResponseEntity.ok().body(c);
     }
     catch (Exception e){
       return ResponseEntity.notFound().build();

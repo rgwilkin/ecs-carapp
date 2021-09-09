@@ -19,13 +19,25 @@ public class CarService {
     this.wordMatchService = wordMatchService;
   }
 
-  public void add(Car car) throws Exception {
+  public Car add(Car car) throws Exception {
     // add similar items for model
+    return addOrUpdate(car);
+  }
+
+  public Car update(Car car) throws Exception{
+
+    return addOrUpdate(car);
+
+  }
+
+  private Car addOrUpdate(Car car) throws Exception{
+
 
     String similarItems = String.join(",", wordMatchService.getMatches(car.getModel()));
 
     car.setSimilarItems(similarItems);
-    carRepository.save(car);
+    return carRepository.save(car);
+
   }
 
   public void delete(int id) throws Exception{

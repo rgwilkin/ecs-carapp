@@ -6,6 +6,7 @@ import static org.mockito.Mockito.doThrow;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static reactor.core.publisher.Mono.when;
@@ -42,7 +43,7 @@ public class CarControllerTests {
   public void test_retrieve() throws Exception {
     Car c = new Car();
 
-    c.setId(1);
+    //c.setId(1);
     c.setMake("ford");
     c.setModel("focus");
     c.setColour("black");
@@ -60,7 +61,7 @@ public class CarControllerTests {
   public void test_retrieve_exception() throws Exception {
     Car c = new Car();
 
-    c.setId(1);
+    //c.setId(1);
     c.setMake("ford");
     c.setModel("focus");
     c.setColour("black");
@@ -79,7 +80,7 @@ public class CarControllerTests {
   public void test_add() throws Exception {
     Car c = new Car();
 
-    c.setId(1);
+    //c.setId(1);
     c.setMake("ford");
     c.setModel("focus");
     c.setColour("black");
@@ -103,7 +104,7 @@ public class CarControllerTests {
   public void test_add_exception() throws Exception {
     Car c = new Car();
 
-    c.setId(1);
+    //c.setId(1);
     c.setMake("ford");
     c.setModel("focus");
     c.setColour("black");
@@ -112,6 +113,50 @@ public class CarControllerTests {
     doThrow(new Exception()).when(carService).add(any());
 
     mvc.perform(post("/cars-rest/v1/cars")
+        .content(mapper.writeValueAsString(c))
+        .contentType(org.springframework.http.MediaType.APPLICATION_JSON))
+        .andExpect(status().isNotFound());
+
+
+  }
+
+  @Test
+  public void test_update() throws Exception {
+    Car c = new Car();
+
+    //c.setId(1);
+    c.setMake("ford");
+    c.setModel("focus");
+    c.setColour("black");
+    c.setYear(2000);
+
+
+
+    mvc.perform(put("/cars-rest/v1/cars")
+        .content(mapper.writeValueAsString(c))
+        .contentType(org.springframework.http.MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk());
+
+
+    ArgumentCaptor<Car> spitterArgument = ArgumentCaptor.forClass(Car.class);
+    Mockito.verify(carService,Mockito.atLeastOnce()).update(spitterArgument.capture());
+
+    Assert.assertEquals(spitterArgument.getValue().getMake(),c.getMake());
+  }
+
+  @Test
+  public void test_update_exception() throws Exception {
+    Car c = new Car();
+
+    //c.setId(1);
+    c.setMake("ford");
+    c.setModel("focus");
+    c.setColour("black");
+    c.setYear(2000);
+
+    doThrow(new Exception()).when(carService).update(any());
+
+    mvc.perform(put("/cars-rest/v1/cars")
         .content(mapper.writeValueAsString(c))
         .contentType(org.springframework.http.MediaType.APPLICATION_JSON))
         .andExpect(status().isNotFound());
